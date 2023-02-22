@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 namespace HMSystem
 {
     class displayInformation
@@ -10,17 +10,17 @@ namespace HMSystem
         protected int rice = 700;
         protected int choice;
         protected int quantity;
-        protected int discount;
-        protected int totalPrice;
-        protected int totalPriceWithDiscount;
+        protected double discount;
+        protected double totalPrice;
+        protected double totalPriceWithDiscount;
         public void displayList()
         {
 
-            Console.WriteLine("1: Chicken Pulao");
-            Console.WriteLine("2: Chicken Tikka");
-            Console.WriteLine("3: Mutton");
-            Console.WriteLine("4: Haleem");
-            Console.WriteLine("5: Rice");
+            Console.WriteLine("1: Chicken Pulao : " + chickenPulao + " PKR ");
+            Console.WriteLine("2: Chicken Tikka : " + chickenTikka + " PKR ");
+            Console.WriteLine("3: Mutton : " + mutton + " PKR ");
+            Console.WriteLine("4: Haleem : " + haleem + " PKR ");
+            Console.WriteLine("5: Rice : " + rice + " PKR ");
             Console.WriteLine("Enter Responed with Item number Only (1 for Chicken Pulao)");
             choice = int.Parse(Console.ReadLine());
             switch(choice)
@@ -42,6 +42,7 @@ namespace HMSystem
                     break;
                 default:
                     Console.WriteLine("Invalid arguments");
+                    displayList();
                     break;
             }
 
@@ -76,7 +77,7 @@ namespace HMSystem
                 discount = 50;
                 totalPriceWithDiscount -= discount;
             }
-            return totalPriceWithDiscount;
+            return (int)totalPriceWithDiscount;
         }
         void chickenPulaoPanel()
         {
@@ -112,9 +113,35 @@ namespace HMSystem
         }
         public void displayBill()
         {
-            Console.WriteLine("Your bill is : " + totalPrice);
-            Console.WriteLine("Your Discount is: " + discount);
-            Console.WriteLine("After Discount Total Price is: " + totalPriceWithDiscount);
+            Console.WriteLine("1: PKR");
+            Console.WriteLine("2: $$$");
+            Console.WriteLine("3: INR");
+            byte Choice1 = byte.Parse(Console.ReadLine());
+            if (Choice1 == 1)
+            {
+                Console.WriteLine("Your bill is : " + totalPrice);
+                Console.WriteLine("Your Discount is: " + discount);
+                Console.WriteLine("After Discount Total Price is: " + totalPriceWithDiscount);
+
+            } else if (Choice1 == 2)
+            {
+                Console.WriteLine("Your bill is : " + totalPrice/220 + " $ ");
+                Console.WriteLine("Your Discount is: " + discount/220 + " $ ");
+                Console.WriteLine("After Discount Total Price is: " + totalPriceWithDiscount/220 + "$");
+            } else if (Choice1 == 3)
+            {
+                Console.WriteLine("Your bill is : " + totalPrice/3 + " INR ");
+                Console.WriteLine("Your Discount is: " + discount / 220 + " INR ");
+                Console.WriteLine("After Discount Total Price is: " + totalPriceWithDiscount / 220 + " INR ");
+            }
+            else
+            {
+                Console.WriteLine("Invalid arguments");
+                displayBill();
+            }
+            //Console.WriteLine("Your bill is : " + totalPrice);
+            //Console.WriteLine("Your Discount is: " + discount);
+            //Console.WriteLine("After Discount Total Price is: " + totalPriceWithDiscount);
         }
     }
     class HManagementSystem: displayInformation
